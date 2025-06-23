@@ -1,0 +1,123 @@
+* {
+    color:rgb(232, 232, 232);
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: black;
+}
+
+header {
+    background-image: linear-gradient(to right, rgb(29, 33, 51), rgb(59, 31, 31));
+    font-size: 1.5rem;
+    font-weight: 900;
+    padding:1rem;
+    padding-left: 2rem;
+    letter-spacing: 2px;
+}
+.controls {
+    display: flex;
+    margin-top: 2.5rem;
+    justify-content: center;
+}
+
+.controls button {
+    border:none;
+    font-size: 1rem;
+    padding: 1rem 2.5rem;
+    border-radius: 1rem;
+    font-weight: 100;
+    cursor: pointer;
+    background-color: rgb(29, 33, 51);
+    letter-spacing: 2px;
+    position: relative;
+}
+.controls button:hover {
+    transition: 200ms;
+    background-color: rgb(58, 66, 100);
+}
+
+.library {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap:1.2rem;
+    margin: 2rem;
+}
+
+.book {
+    display:flex;
+    flex-direction: column;
+    height: 350px;
+    background-color: rgb(29, 33, 51);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding:1rem;
+    border-radius: 1rem;
+    position: relative;
+}
+
+.book h1 {
+    font-size: 1.8rem;
+}
+
+.book h2 {
+    opacity: 0.75;
+    font-weight: 400;
+    font-size: 1.2rem;
+    margin-top:0.7rem;
+}
+.book p:nth-child(3) {
+    position: absolute;
+    bottom:1rem;
+    right: 1rem;
+    font-size:0.8rem;
+    letter-spacing: 2px;
+    opacity: 0.75;
+}
+.book p:nth-child(3) > span::before {
+    content:" ✗";
+    color: rgb(245, 105, 105);
+    font-weight: 900;
+    font-size: 1.1rem;
+}
+.book p:nth-child(4) {
+    position: absolute;
+    
+}
+
+.book button {
+    background-color: transparent;
+    border:none;
+    cursor:pointer;
+    letter-spacing: 2px;
+    padding:8px;
+    position:absolute;
+    border-radius: 12px;
+}
+.book button:nth-child(4) {
+    color:rgb(186, 71, 71);
+    top:0.4rem;
+    right:0.4rem;
+
+}
+
+.book button:nth-child(4):hover {
+    background-color: rgb(99, 54, 54);
+    transition: 200ms;
+}
+
+.book button:nth-child(5) {
+    left: 0.4rem;
+    color: rgb(112, 121, 176);
+    font-weight: 900;
+    top:0.4rem;
+}
+
+.book button:nth-child(5):hover {
+    transition: 200ms;
+    background-color: rgb(61, 68, 105);
+}
