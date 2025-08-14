@@ -10,7 +10,7 @@ function Book(title, author, haveRead=false, pages=undefined) {
 
 function addBookToLibrary(book) {
   myLibrary.push(book); 
-  displayBook(book);
+  renderLibrary();
 }
 
 function assignReadTxt(bookContainer, book=undefined) {
@@ -23,8 +23,15 @@ function assignReadTxt(bookContainer, book=undefined) {
   return bookContainer.classList.contains("read") ? "unread" : "read"
 }
 
+function renderLibrary() {
+  while (library.firstChild) {
+    library.removeChild(library.firstChild);
+  }
+  myLibrary.forEach(book => displayBook(book));
+}
+
+const library = document.querySelector(".library");
 function displayBook(book) {
-  const library = document.querySelector(".library");
   const bookContainer = document.createElement("div");
   const title = document.createElement("h1");
   const author = document.createElement("h2");
@@ -33,21 +40,16 @@ function displayBook(book) {
   author.textContent = book.author;
   pages.textContent = `${book.pages} pages`;
 
+  bookContainer.setAttribute("class", "book");
   if (book.haveRead) {
     bookContainer.setAttribute("class", "book read");
-  }
-  else {
-    bookContainer.setAttribute("class", "book");
   }
 
   const removeButton = document.createElement("button");
   removeButton.textContent = "remove";
-  removeButton.addEventListener("click", (e) => {
-    e.target.parentElement.remove();
-    myLibrary.forEach((lit) => {
-      if (lit.id === book.id)
-        myLibrary.splice(myLibrary.indexOf(book), 1);
-    })
+  removeButton.addEventListener("click", () => {
+    myLibrary.splice(myLibrary.indexOf(book), 1);
+    renderLibrary();
   });
   const readButton = document.createElement("button");
   readButton.textContent = assignReadTxt(bookContainer);
@@ -89,16 +91,16 @@ submitBtn.addEventListener("click", (e) => {
   
   const form = document.querySelector("form");
   if (form.checkValidity()) {
-  const inputBook = new Book(inputTitle.value, inputAuthor.value, inputRead.checked, inputPages.value);
-  addBookToLibrary(inputBook);
-  const form = document.querySelector("form")
-  form.reset();
-  dialog.close();
+    const inputBook = new Book(inputTitle.value, inputAuthor.value, inputRead.checked, inputPages.value);
+    addBookToLibrary(inputBook);
+    const form = document.querySelector("form")
+    form.reset();
+    dialog.close();
   }
   else {
     const inv = form.querySelectorAll(":invalid");
     inv.forEach((input) => {
-      input.setAttribute("style", "border:2px solid red")
+      input.setAttribute("style", "border:2px solid red; transition:200ms");
     })
   }
 })
@@ -106,6 +108,6 @@ submitBtn.addEventListener("click", (e) => {
 const inputs = document.querySelectorAll("input");
 inputs.forEach((input) => {
   input.addEventListener("focus", (e) => {
-    e.target.setAttribute("style", "transition:200ms; border:none;");
+    e.target.setAttribute("style", "transition:200ms; border:none; transition: 200ms");
   })
 })
